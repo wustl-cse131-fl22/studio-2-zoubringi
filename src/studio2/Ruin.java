@@ -15,28 +15,41 @@ public class Ruin {
 		System.out.println("How many simulations? ");
 		int totalSimulations = in.nextInt();
 		
-		int winAmount = 0;
+		int winCount = 0;
+		int lossCount = 0;
 
-		boolean keepGoing = ((winAmount <= winLimit) && (startAmount >= 0));
+		boolean keepGoing = ((winCount <= winLimit) && (startAmount >= 0));
 		for (int i = 0; i < totalSimulations; i++)
 		{	
-			
+			String result = "";
 			while (keepGoing)
 			{
-			keepGoing = ((winAmount <= winLimit) && (startAmount >= 0));
+			keepGoing = ((winCount <= winLimit) && (startAmount >= 0));
 			double win = Math.random();
 			boolean winYes = win >= (1 - winChance);
 			if (winYes)
 			{
 				startAmount ++;
-				winAmount ++;
+				winCount ++;
+
+				
 				System.out.println(startAmount);
 			}
 			else
 			{	
 				startAmount --;
+				lossCount ++;
 				System.out.println(startAmount);
 			}
+			}
+			
+			
+			if (winCount == winLimit) {
+				result = "WIN"; 
+				System.out.println("Simulation " + i + ": " + (winCount + lossCount) + "");
+			}
+			else if (startAmount == 0) {
+				result = "LOSE";
 			}
 
 		}
